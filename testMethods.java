@@ -125,6 +125,21 @@ public class testMethods {
   
     }
 
+   //Fuction to navigate to other window.
+  public static void windowHandle(){
+    driver.get("http://omayo.blogspot.com/");
+    String mainWindow = driver.getWindowHandle();
+    driver.findElement(By.linkText("Open a popup window")).click();
+    Set<String> windows = driver.getWindowHandles();
+    java.util.Iterator<String> it = windows.iterator();
+    it.next();
+    String secondWindow = it.next();
+    driver.switchTo().window(secondWindow);
+    driver.close();
+    driver.switchTo().window(mainWindow);
+
+    }
+
     public static void main(String[] args) {
   
   }
