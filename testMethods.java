@@ -157,6 +157,21 @@ public class testMethods {
      }    
  }
 
+   //Fuction to open a new tab and and navigate to other URL.
+  public static void windowHandle(){
+    driver.get("https://www.google.com/");
+    String mainHandle = driver.getWindowHandle();
+    JavascriptExecutor jv = (JavascriptExecutor) driver;
+    jv.executeScript("window.open()");
+    Set<String> Handles = driver.getWindowHandles();
+    java.util.Iterator<String> it = Handles.iterator();
+    it.next();
+    String secondHandle = it.next();
+    driver.switchTo().window(secondHandle);
+    driver.get("https://www.youtube.com/");
+
+    }
+
     public static void main(String[] args) {
   
   }
