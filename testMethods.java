@@ -140,6 +140,23 @@ public class testMethods {
 
     }
 
+   //Fuction 2 to navigate to other window.
+  public static void windowHandle(){
+    driver.get("http://omayo.blogspot.com/");
+    String mainWindow = driver.getWindowHandle();
+    String mainTitle = driver.getTitle();
+    driver.findElement(By.linkText("Open a popup window")).click();
+    Set<String> windows = driver.getWindowHandles();
+    java.util.Iterator<String> it1 = windows.iterator();
+    while(it1.hasNext()){
+      String window = it1.next();
+      driver.switchTo().window(window);
+      if(!driver.getTitle().equals(mainTitle)){
+        driver.close();
+       }
+     }    
+ }
+
     public static void main(String[] args) {
   
   }
