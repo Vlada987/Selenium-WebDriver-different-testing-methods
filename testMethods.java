@@ -171,6 +171,29 @@ public class testMethods {
     driver.get("https://www.youtube.com/");
 
     }
+   //Handling a drop down menu without select class
+   public static void vezba(String... value){
+    driver.get("https://www.jqueryscript.net/demo/Drop-Down-Combo-Tree/");
+    driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
+    driver.findElement(By.xpath("//input[@id='justAnInputBox']")).click();
+    List<WebElement> elements = driver.findElements(By.xpath("//span[@class='comboTreeItemTitle']"));
+    if(!value[0].equals("all")){
+      for(WebElement el:elements){
+        String elTXT = el.getText();
+        for(String val:value){
+          if(elTXT.equals(val)){
+            el.click();
+            break;
+          }
+        }
+      }
+    }
+    else{
+      for(WebElement ele:elements){
+        ele.click();
+      }
+    }   
+  }
 
     public static void main(String[] args) {
   
