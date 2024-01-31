@@ -75,6 +75,7 @@ public class testMethods {
 
    //DropDown selection in a different frame whitin a webpage
    public static void frameSelect(){
+    driver.get(https://www.hyrtutorials.com/p/frames-practice);  
     WebElement frame1 = driver.findElement(By.cssSelector("#frm1"));
     driver.switchTo().frame(frame1);
     WebElement dropDownMenu = driver.findElement(By.cssSelector("#selectnav2"));
