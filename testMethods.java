@@ -173,7 +173,7 @@ public class testMethods {
 
     }
    //Handling a drop down menu without select class
-   public static void vezba(String... value){
+   public static void dropDown2(String... value){
     driver.get("https://www.jqueryscript.net/demo/Drop-Down-Combo-Tree/");
     driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
     driver.findElement(By.xpath("//input[@id='justAnInputBox']")).click();
@@ -194,6 +194,15 @@ public class testMethods {
         ele.click();
       }
     }   
+  }
+    public static void checkBox10sDelay(){
+      driver.get("http://omayo.blogspot.com/");
+      WebDriverWait wait12s = new WebDriverWait(driver, Duration.ofSeconds(12));
+      driver.findElement(By.xpath("//button[@onclick='setTimeout(myFunctionAXD,10000)']")).click();
+      WebElement checkbox = driver.findElement(By.xpath("//input[@id='dte']"));
+      wait12s.until(ExpectedConditions.elementToBeClickable(checkbox)).click();
+
+
   }
 
     public static void main(String[] args) {
