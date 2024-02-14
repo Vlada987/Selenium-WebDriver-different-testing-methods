@@ -204,6 +204,34 @@ public class testMethods {
 
 
   }
+   //Handling paginated WebTable and taking all names from table data
+   public static void paginatedTableHandling(){
+    driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);  
+    driver.get("https://datatables.net/examples/advanced_init/dt_events.html");
+    List<WebElement> namesEL = driver.findElements(By.xpath("/html/body/div[2]/div[3]/div/div[2]/div[2]/table/tbody/tr/td[1]"));
+    List<String>names=new ArrayList<>();
+    for(WebElement nameEL:namesEL){
+      names.add(nameEL.getText());
+    }
+    String nextButtonClass = driver.findElement(By.id("example_next")).getAttribute("class");
+    while(!nextButtonClass.contains("disabled")){
+      driver.findElement(By.id("example_next")).click();
+      namesEL=driver.findElements(By.xpath("/html/body/div[2]/div[3]/div/div[2]/div[2]/table/tbody/tr/td[1]"));
+      for(WebElement nameEL:namesEL){
+        names.add(nameEL.getText());
+      }
+      nextButtonClass=driver.findElement(By.id("example_next")).getAttribute("class");
+    }
+    WebElement textElement = driver.findElement(By.xpath("//div[@id='example_info']")); 
+    String text = textElement.getText();
+    String[] splitTxt = text.split(" ");
+    String num = splitTxt[5];
+    Integer intValue = Integer.valueOf(num);
+    int intValue2 = names.size();
+    if(intValue==intValue2){
+      System.out.println("pass");
+     }
+    }
 
     public static void main(String[] args) {
   
