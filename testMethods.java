@@ -232,8 +232,33 @@ public class testMethods {
       System.out.println("pass");
      }
     }
+  //Getting a screenShot of element and saving as a new file
+  public static void takePhotoOfElement() throws IOException{
+    driver.get("http://omayo.blogspot.com/");
+    WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(5));
+    w.until(ExpectedConditions.visibilityOfElementLocated(By.id("multiselect1")));
+    File photo = driver.findElement(By.id("multiselect1")).getScreenshotAs(OutputType.FILE);
+    FileHandler.copy(photo, new File(System.getProperty("user.dir")+"\\scr1.png"));
 
-    public static void main(String[] args) {
+}
+  //Performing the right click action
+  public static void rightClick(){
+    driver.get("https://swisnl.github.io/jQuery-contextMenu/demo.html");
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+    WebElement RCbutton = driver.findElement(By.xpath("/html/body/div/section/div/div/div/p/span"));
+    Actions act = new Actions(driver);
+    act.contextClick(RCbutton).perform();
+    driver.findElement(By.xpath("/html/body/ul/li[1]/span")).click();
+    try {
+      Thread.sleep(2);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    Alert al = driver.switchTo().alert();
+    al.accept();
+  }
+ 
+public static void main(String[] args) {
   
   }
 }
