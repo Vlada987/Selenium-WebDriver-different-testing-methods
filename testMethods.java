@@ -257,6 +257,73 @@ public class testMethods {
     Alert al = driver.switchTo().alert();
     al.accept();
   }
+
+     //Getting location of element and click using Robot class
+  public static void rbtClick() throws AWTException{
+    driver.get("http://omayo.blogspot.com/");
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(9));
+    String mainWindow = driver.getWindowHandle();
+    WebElement linkButton = driver.findElement(By.id("selenium143"));
+    Point pt = linkButton.getLocation();
+    int y = pt.getY(); //320
+    int x = pt.getX(); //185
+    Robot rbt = new Robot();
+    rbt.mouseMove(185,320);
+    rbt.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+    rbt.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+    Set<String> windowHandles = driver.getWindowHandles();
+    for(String handle:windowHandles){
+      if(!handle.equals(mainWindow)){
+        driver.switchTo().window(handle);
+        
+      }
+    }
+    driver.close();
+    driver.switchTo().window(mainWindow);
+  }
+
+  //Handling the window elements using Robot class (upload a file)
+  public static void uploadFile() throws AWTException{
+    driver.get("https://the-internet.herokuapp.com/upload");
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+    Robot rbt = new Robot();
+    Point loc = driver.findElement(By.id("file-upload")).getLocation();
+    int y = loc.getY();
+    int x = loc.getX();
+    rbt.mouseMove(x+8, y+88); //point give incorect cordinates :( 
+    rbt.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+    rbt.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+    rbt.delay(2015);
+    rbt.keyPress(KeyEvent.VK_K);
+    rbt.keyRelease(KeyEvent.VK_K);
+    rbt.keyPress(KeyEvent.VK_E);
+    rbt.keyRelease(KeyEvent.VK_E);
+    rbt.keyPress(KeyEvent.VK_C);
+    rbt.keyRelease(KeyEvent.VK_C);
+    rbt.keyPress(KeyEvent.VK_ENTER);
+    rbt.keyRelease(KeyEvent.VK_ENTER);
+  }
+  //Handling alert pop-up typing hello and submit using robot class
+  public static void alert2Robot() throws AWTException{
+    driver.get("https://the-internet.herokuapp.com/javascript_alerts");
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+    driver.findElement(By.xpath("/html/body/div[2]/div/div/ul/li[3]/button")).click();
+    Robot rbt = new Robot();
+    rbt.keyPress(KeyEvent.VK_H);
+    rbt.keyRelease(KeyEvent.VK_H);
+    rbt.keyPress(KeyEvent.VK_E);
+    rbt.keyRelease(KeyEvent.VK_E);
+    rbt.keyPress(KeyEvent.VK_L);
+    rbt.keyRelease(KeyEvent.VK_L);
+    rbt.keyPress(KeyEvent.VK_L);
+    rbt.keyRelease(KeyEvent.VK_L);
+    rbt.keyPress(KeyEvent.VK_O);
+    rbt.keyRelease(KeyEvent.VK_O);
+    rbt.delay(2024);
+    rbt.keyPress(KeyEvent.VK_ENTER);
+    rbt.keyRelease(KeyEvent.VK_ENTER);
+
+    }
  
 public static void main(String[] args) {
   
