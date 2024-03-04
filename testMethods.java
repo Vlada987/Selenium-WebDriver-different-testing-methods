@@ -62,7 +62,7 @@ public class testMethods {
     String year = "2025";
     String day = "23";
     while(!(driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText().equals(month)) 
-    && driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText().equals(year)){
+    && driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText().equals(year)){
     driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-e']")).click();
       }
     List <WebElement> days = driver.findElements(By.xpath("//a[@class='ui-state-default']"));
@@ -323,6 +323,27 @@ public class testMethods {
     rbt.keyPress(KeyEvent.VK_ENTER);
     rbt.keyRelease(KeyEvent.VK_ENTER);
 
+    }
+
+     //Testing links on a page and reading responce data
+  public static void linksValidation() throws MalformedURLException, IOException {
+    driver.get("https://tutorialsninja.com/demo/");
+    List<WebElement> links = driver.findElements(By.tagName("a"));
+    for(WebElement link:links){
+      String url = link.getAttribute("href");
+      System.out.println(url);
+      if(url==null || url.isEmpty()){
+        System.out.println("empty url is present");
+        continue;
+      }
+      HttpURLConnection hc = (HttpURLConnection)(new URL(url).openConnection());
+      hc.connect();
+      if(hc.getResponseCode()>=400){
+        System.out.println("Broken url is present");
+      }
+      else{
+        System.out.println("url is valid");
+      }
     }
  
 public static void main(String[] args) {
